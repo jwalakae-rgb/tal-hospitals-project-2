@@ -64,7 +64,7 @@ export default function PatientDashboard() {
             {appointments.map((a) => (
               <div key={a._id} className="py-4 flex items-center justify-between">
                 <div>
-                  <p className="font-medium text-ink-900">Dr. {a.doctor?.user?.name}</p>
+                  <p className="font-medium text-ink-900"> {a.doctor?.user?.name}</p>
                   <p className="text-sm text-ink-500">
                     {format(new Date(a.appointmentDate), 'MMM d, yyyy')} · {a.timeSlot} · {a.department?.name}
                   </p>
