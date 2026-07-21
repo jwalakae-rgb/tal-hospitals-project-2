@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply bg-paper text-ink-900 font-body antialiased;
+}
+
+h1, h2, h3, h4 {
+  @apply font-display text-ink-950;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #8FA9A3 transparent;
+}
+
+:focus-visible {
+  outline: 2px solid #0F6B65;
+  outline-offset: 2px;
+}
+
+.status-pill {
+  @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold;
+}
