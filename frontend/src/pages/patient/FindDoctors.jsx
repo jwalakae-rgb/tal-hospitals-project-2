@@ -58,7 +58,7 @@ export default function FindDoctors() {
             <Card key={doc._id} className="p-5 flex flex-col">
               <div className="flex items-start justify-between mb-3">
                 <div>
-                  <p className="font-display font-semibold text-ink-950">Dr. {doc.user?.name}</p>
+                  <p className="font-display font-semibold text-ink-950"> {doc.user?.name}</p>
                   <p className="text-sm text-ink-500">{doc.specialization}</p>
                 </div>
                 <span className="text-xs font-semibold text-clinical-700 bg-clinical-50 px-2.5 py-1 rounded-full whitespace-nowrap">
