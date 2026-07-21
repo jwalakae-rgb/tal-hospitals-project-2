@@ -96,7 +96,7 @@ export default function MyAppointments() {
             <Card key={a._id} className="p-5">
               <div className="flex items-start justify-between">
                 <div>
-                  <p className="font-display font-semibold text-ink-950">Dr. {a.doctor?.user?.name}</p>
+                  <p className="font-display font-semibold text-ink-950"> {a.doctor?.user?.name}</p>
                   <p className="text-sm text-ink-500">{a.department?.name} · {a.doctor?.specialization}</p>
                   <p className="text-sm text-ink-700 mt-1">
                     {format(new Date(a.appointmentDate), 'EEEE, MMM d, yyyy')} · {a.timeSlot}
