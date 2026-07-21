@@ -46,7 +46,7 @@ export default function BookAppointmentModal({ doctor, onClose, onBooked }) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between mb-1">
-          <h2 className="font-display font-semibold text-lg text-ink-950">Book with Dr. {doctor.user?.name}</h2>
+          <h2 className="font-display font-semibold text-lg text-ink-950">Book with {doctor.user?.name}</h2>
           <button onClick={onClose} className="text-ink-300 hover:text-ink-700 text-xl leading-none">×</button>
         </div>
         <p className="text-sm text-ink-500 mb-5">{doctor.specialization} · ₹{doctor.consultationFee} consultation fee</p>
