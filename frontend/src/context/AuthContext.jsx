@@ -28,12 +28,19 @@ export function AuthProvider({ children }) {
     loadUser();
   }, [loadUser]);
 
-  const login = async (email, password) => {
-    const { token, data } = await loginUser({ email, password });
-    localStorage.setItem('tal_token', token);
-    setUser(data.user);
-    return data.user;
-  };
+  const login = async (email, password, role) => {
+  const { token, data } = await loginUser({
+    email,
+    password,
+    role,
+  });
+
+  localStorage.setItem('tal_token', token);
+
+  setUser(data.user);
+
+  return data.user;
+};
 
   const register = async (payload) => {
     const { token, data } = await registerUser(payload);
