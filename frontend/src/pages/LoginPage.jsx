@@ -6,6 +6,39 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 import Card from '../components/Card';
 
+const TABS = [
+  {
+    key: 'patient',
+    label: 'Patient',
+    icon: 'M12 12a4 4 0 100-8 4 4 0 000 8zm-7 9a7 7 0 0114 0',
+  },
+  {
+    key: 'doctor',
+    label: 'Doctor',
+    icon: 'M6 3v6a4 4 0 008 0V3M10 15a6 6 0 006-6M18 21a3 3 0 100-6 3 3 0 000 6z',
+  },
+  {
+    key: 'admin',
+    label: 'Admin',
+    icon: 'M4 21V7l8-4 8 4v14M9 21v-6h6v6M9 10h.01M15 10h.01M9 14h.01M15 14h.01',
+  },
+];
+
+const DEMO_CREDS = {
+  patient: {
+    email: 'arjun.verma@example.com',
+    password: 'Patient@1234',
+  },
+  doctor: {
+    email: 'aditi.sharma@talhospitals.com',
+    password: 'Doctor@1234',
+  },
+  admin: {
+    email: 'admin@talhospitals.com',
+    password: 'Admin@1234',
+  },
+};
+
 export default function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
