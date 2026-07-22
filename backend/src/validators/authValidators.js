@@ -15,6 +15,10 @@ exports.registerValidator = [
 exports.loginValidator = [
   body('email').isEmail().withMessage('Valid email is required').normalizeEmail(),
   body('password').notEmpty().withMessage('Password is required'),
+  body('role')
+    .optional()
+    .isIn(['patient', 'doctor', 'admin'])
+    .withMessage('Invalid role'),
 ];
 
 exports.updatePasswordValidator = [
