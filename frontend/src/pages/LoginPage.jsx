@@ -40,19 +40,41 @@ const DEMO_CREDS = {
 };
 
 export default function LoginPage() {
-  const { login } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [form, setForm] = useState({ email: '', password: '' });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+ const { login } = useAuth();
+const navigate = useNavigate();
+const location = useLocation();
+
+const params = new URLSearchParams(location.search);
+const defaultRole = params.get('role') || 'patient';
+
+const [activeTab, setActiveTab] = useState(defaultRole);
+
+const [form, setForm] = useState({
+  email: '',
+  password: '',
+});
+const handleTabChange = (role) => {
+  setActiveTab(role);
+  setError('');
+  setForm({
+    email: '',
+    password: '',
+  });
+};
+const [loading, setLoading] = useState(false);
+const [error, setError] = useState('');
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setLoading(true);
     try {
-      const user = await login(form.email, form.password);
+     const user = await login(
+  form.email,
+  form.password,
+  activeTab
+);
       toast.success(`Welcome back, ${user.name.split(' ')[0]}`);
       const from = location.state?.from?.pathname || '/app/dashboard';
       navigate(from, { replace: true });
@@ -74,8 +96,35 @@ export default function LoginPage() {
         </div>
 
         <Card className="p-8">
-          <h1 className="text-xl font-display font-semibold text-ink-950 mb-1">Log in to your account</h1>
-          <p className="text-sm text-ink-500 mb-6">Enter your credentials to continue.</p>
+          <div className="flex rounded-sm border border-line p-1 bg-paper mb-6">
+  {TABS.map((tab) => (
+    <button
+      key={tab.key}
+      type="button"
+      onClick={() => handleTabChange(tab.key)}
+      className={`flex-1 py-2 rounded-sm text-sm font-semibold transition-colors ${
+        activeTab === tab.key
+          ? 'bg-clinical-700 text-white'
+          : 'text-ink-500 hover:bg-gray-100'
+      }`}
+    >
+      {tab.label}
+    </button>
+  ))}
+</div>
+         <h1 className="text-xl font-display font-semibold text-ink-950 mb-1 capitalize">
+  {activeTab} Login
+</h1>
+         <p className="text-sm text-ink-500 mb-6">
+  {activeTab === 'patient' &&
+    'Log in to book and manage your appointments.'}
+
+  {activeTab === 'doctor' &&
+    'Log in to manage appointments and prescriptions.'}
+
+  {activeTab === 'admin' &&
+    'Log in to manage the hospital system.'}
+</p>
 
           {error && (
             <div className="mb-4 text-sm text-signal-danger bg-signal-dangerBg border border-signal-danger/20 rounded-sm px-3.5 py-2.5">
@@ -100,25 +149,43 @@ export default function LoginPage() {
               onChange={(e) => setForm({ ...form, password: e.target.value })}
               placeholder="••••••••"
             />
-            <Button type="submit" className="w-full" loading={loading}>
-              Log in
-            </Button>
+           <Button type="submit" className="w-full" loading={loading}>
+  Log in as {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
+</Button>
           </form>
 
-          <p className="text-sm text-ink-500 text-center mt-6">
-            New patient?{' '}
-            <Link to="/register" className="font-semibold text-clinical-700 hover:text-clinical-900">
-              Create an account
-            </Link>
-          </p>
+         {activeTab === 'patient' ? (
+  <p className="text-sm text-ink-500 text-center mt-6">
+    New patient?{' '}
+    <Link
+      to="/register"
+      className="font-semibold text-clinical-700 hover:text-clinical-900"
+    >
+      Create an account
+    </Link>
+  </p>
+) : (
+  <p className="text-sm text-ink-500 text-center mt-6">
+    {activeTab === 'doctor'
+      ? 'Doctor accounts are created by the administrator.'
+      : 'Administrator accounts are managed by the system.'}
+  </p>
+)}
         </Card>
 
-        <div className="mt-6 bg-clinical-50 border border-clinical-100 rounded-sm px-4 py-3 text-xs text-clinical-900">
-          <p className="font-semibold mb-1">Demo credentials (after seeding)</p>
-          <p>Admin: admin@talhospitals.com / Admin@1234</p>
-          <p>Doctor: aditi.sharma@talhospitals.com / Doctor@1234</p>
-          <p>Patient: arjun.verma@example.com / Patient@1234</p>
-        </div>
+       <div className="mt-6 bg-clinical-50 border border-clinical-100 rounded-sm px-4 py-3 text-xs text-clinical-900">
+  <p className="font-semibold mb-2">
+    Demo Credentials ({activeTab.charAt(0).toUpperCase() + activeTab.slice(1)})
+  </p>
+
+  <p>
+    <strong>Email:</strong> {DEMO_CREDS[activeTab].email}
+  </p>
+
+  <p>
+    <strong>Password:</strong> {DEMO_CREDS[activeTab].password}
+  </p>
+</div>
       </div>
     </div>
   );
