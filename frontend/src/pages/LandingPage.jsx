@@ -27,17 +27,28 @@ export default function LandingPage() {
             <div className="w-8 h-8 rounded-sm bg-vital-500 flex items-center justify-center font-display font-bold text-white text-sm">T</div>
             <span className="font-display font-semibold text-ink-950">TALHospitals</span>
           </div>
-          <div className="flex items-center gap-3">
-            <Link to="/login" className="text-sm font-medium text-ink-700 hover:text-clinical-900 px-3 py-2">
-              Log in
-            </Link>
-            <Link
-              to="/register"
-              className="text-sm font-semibold text-white bg-clinical-700 hover:bg-clinical-900 px-4 py-2.5 rounded-sm transition-colors"
-            >
-              Create account
-            </Link>
-          </div>
+        <div className="flex items-center gap-3">
+  <Link
+    to="/login?role=patient"
+    className="text-sm font-medium text-ink-700 hover:text-clinical-900 px-3 py-2"
+  >
+    Patient Login
+  </Link>
+
+  <Link
+    to="/login?role=doctor"
+    className="text-sm font-medium text-ink-700 hover:text-clinical-900 px-3 py-2"
+  >
+    Doctor Login
+  </Link>
+
+  <Link
+    to="/login?role=admin"
+    className="text-sm font-semibold text-white bg-clinical-700 hover:bg-clinical-900 px-4 py-2.5 rounded-sm transition-colors"
+  >
+    Admin Login
+  </Link>
+</div>
         </div>
       </header>
 
@@ -53,17 +64,28 @@ export default function LandingPage() {
             Patients book and track visits, doctors manage their queue and prescriptions, and admins see the whole
             hospital's operations — all in one place.
           </p>
-          <div className="flex items-center gap-4">
-            <Link
-              to="/register"
-              className="text-sm font-semibold text-white bg-vital-500 hover:bg-vital-700 px-5 py-3 rounded-sm transition-colors"
-            >
-              Book your first appointment
-            </Link>
-            <Link to="/login" className="text-sm font-semibold text-ink-700 hover:text-clinical-900">
-              I already have an account →
-            </Link>
-          </div>
+         <div className="flex flex-wrap items-center gap-4">
+  <Link
+    to="/login?role=patient"
+    className="text-sm font-semibold text-white bg-vital-500 hover:bg-vital-700 px-5 py-3 rounded-sm transition-colors"
+  >
+    Patient Portal
+  </Link>
+
+  <Link
+    to="/login?role=doctor"
+    className="text-sm font-semibold text-white bg-clinical-700 hover:bg-clinical-900 px-5 py-3 rounded-sm transition-colors"
+  >
+    Doctor Portal
+  </Link>
+
+  <Link
+    to="/login?role=admin"
+    className="text-sm font-semibold text-white bg-ink-900 hover:bg-black px-5 py-3 rounded-sm transition-colors"
+  >
+    Admin Portal
+  </Link>
+</div>
         </div>
 
         <div className="relative">
